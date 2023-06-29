@@ -45,13 +45,32 @@ namespace _4_studenci
             else
                 student.Ocena = ocena;
 
-            Console.WriteLine("Podaj płeć (0 - Mężczyzna, 1 - Kobieta):");
-            int plec = Convert.ToInt32(Console.ReadLine());
+            int plec;
+
+            do
+            {
+                Console.WriteLine("Podaj płeć (0 - Mężczyzna, 1 - Kobieta):");
+                bool isValid = int.TryParse(Console.ReadLine(), out plec);
+
+                if (isValid && (plec == 0 || plec == 1))
+                {
+                    break; // Poprawna wartość, przerywamy pętlę
+                }
+                else
+                {
+                    Console.WriteLine("Nieprawidłowa wartość. Podaj 0 lub 1.");
+                }
+            } while (true);
 
             if (plec == 0)
+            {
                 student.Plec = Plec.Mezczyzna;
-            else
+            }
+            else if (plec == 1)
+            {
                 student.Plec = Plec.Kobieta;
+            }
+
         }
 
         static double ObliczSrednia(Student[] grupa)
